@@ -1,3 +1,14 @@
+golang.Go
+ms-python.python
+yzhang.markdown-all-in-one
+Angular.ng-template
+rebornix.Ruby
+mikestead.dotenv
+onecentlin.laravel-blade
+rust-lang.rust
+dan-c-underwood.arm
+goessner.mdmath
+ms-vscode.js-atom-grammar
 alexcvzz.vscode-sqlite
 andys8.jest-snippets
 apollographql.vscode-apollo
