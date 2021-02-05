@@ -87,7 +87,7 @@ if ${use_color} ; then
 	if [[ ${EUID} == 0 ]] ; then
 		PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
 	else
-		PS1='\e[0;31m\u \e[32m\W >>\e[0m '
+		PS1='\e[0;31m\e[32m\W ➤\e[0m '
 	fi
 
 	alias ls='ls --color=auto'
@@ -122,6 +122,14 @@ alias myip="curl https://ipinfo.io; echo"
 alias loip="/sbin/ifconfig enp2s0 | awk '/inet / {print $2}' | sed -e s/addr://"
 alias open="xdg-open"
 alias rm="rm -i"
+alias youtube_mp3="youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0"
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
+
 
 
 
@@ -147,13 +155,20 @@ alias psmem="ps auxf | sort -nr -k 4"
 alias pscpu="ps auxf | sort -nr -k 3"
 
 # git alias
-alias gs="git status"
-alias gl="git log"
+alias gst="git status"
+alias glog="git log"
 alias commit="git commit -a"
-alias ga="git add -A"
-alias gal="git add ."
+alias gaup="git add -U"
+alias gad="git add ."
 alias push="git push"
 alias pull="git pull"
+
+#get error messages from journalctl
+alias jctl="journalctl -p 3 -xb"
+
+# switch between  shells
+alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
+alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
 
 
 
@@ -216,6 +231,8 @@ transfer() {
 	curl --progress-bar --upload-file "$1" "https://free.keep.sh/$basefile" >> $tmpfile; 
 	else curl --progress-bar --upload-file "-" "https://free.keep.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; 
 }
+
+alias tb="nc termbin.com 9999"
 
 
 imgur() {
