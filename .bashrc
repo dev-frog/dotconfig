@@ -121,28 +121,55 @@ alias pst='ps -ejH'
 alias myip="curl https://ipinfo.io; echo"
 alias loip="/sbin/ifconfig enp2s0 | awk '/inet / {print $2}' | sed -e s/addr://"
 alias open="xdg-open"
-alias rm="rm -i"
 alias youtube_mp3="youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0"
 
-alias ..='cd ..'
-alias ...='cd ../..'
-alias .3='cd ../../..'
-alias .4='cd ../../../..'
-alias .5='cd ../../../../..'
+#alias ..='cd ..'
+#alias ...='cd ../..'
+#alias .3='cd ../../..'
+#alias .4='cd ../../../..'
+#alias .5='cd ../../../../..'
 
+alias cd..="cd .."
+alias ..="cd .."
+alias ...="cd ../.."
+#navigation
+up() {
+    local d=""
+    local limit="$1"
+
+    if [ -z "$limit" ] || [ "$limit" -le 0 ]; then
+        limit=1
+    fi
+    for ((i=1; i<=limit;i++));do
+        d="../$d"
+    done
+
+    if ! cd "$d"; then
+        echo "Couldn't go up $limit dir.";
+    fi
+}
 
 
 
 # my custom alias
 
 mc(){
-  mkdir -p $1 && cd $1
+  mkdir -p $1 && cd $_
 }
 
 tmpt(){
   cd $(mktemp -d)
 }
 
+# alacitty
+alc() {
+    pycritty  --size $1 --opacity $2
+}
+
+# system command
+alias install="sudo pacman -S"
+alias SS="sudo systemctl"
+alias jctl="journalctl -p 3 -xb"
 
 # Server
 alias www="python -m http.server 8000"
@@ -170,11 +197,29 @@ alias jctl="journalctl -p 3 -xb"
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
 alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
 
-
+alias em="/usr/bin/emacs -nw"
 
 
 # Develpment
 alias pas='php artisan serve'
+
+
+
+# Nodejs and npm
+alias nb="npm run build"
+alias nis="npm i --save"
+alias nid="npm i --save-dev"
+alias ng="sudo npm -g i"
+alias nd="npm run dev"
+alias ns="npm start"
+
+# Docker
+# dkill() { 
+# 	sudo docker rm -f $(sudo docker ps -a -q):
+# }
+# alias dstop="sudo docker stop -f $(sudo docker ps -a -q)"
+
+
 
 
 xhost +local:root > /dev/null 2>&1
