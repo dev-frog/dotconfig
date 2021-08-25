@@ -123,6 +123,10 @@ alias loip="/sbin/ifconfig enp2s0 | awk '/inet / {print $2}' | sed -e s/addr://"
 alias open="xdg-open"
 alias youtube_mp3="youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0"
 
+
+
+
+alias sysinfo="inxi --admin --verbosity=7 --filter --no-host --width"
 #alias ..='cd ..'
 #alias ...='cd ../..'
 #alias .3='cd ../../..'

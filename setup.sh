@@ -20,3 +20,73 @@ BLACKBG="$(printf '\033[40m')"
 
 RESET="$(printf '\033[37m')"
 
+
+check_distro() {
+    distor=$(uname -a | grep -i -c "manjaro")
+    if [ $distor -ne 1 ]; then
+        echo -e "\n $RED 😈 Manjaro Linux Not detected $RESET  \n";exit
+    fi
+}
+
+check_root() {
+    if [ "$EUID" -ne 0 ]; then
+        echo  -e "\n $RED 😱 Script must be run with as root $RESET \n";exit
+    fi
+}
+
+
+mirror_set(){
+    echo -e "\n ✔ $GREEN Updating Mirror List.... $RESET \n"
+    eval pacman-mirrors -g
+}
+
+
+update() {
+    echo -e "\n ✔ $GREEN Updating system using pacman  update command.... $RESET \n"
+    eval pacman -Syyu
+}
+
+install_tools() {
+    echo -e "\n ✔ $GREEN Installing some tools .... $RESET \n"
+    eval pacman -S gcc code chromium rofi vifm lsd go nodejs npm alacritty gdb tmux
+}
+
+
+
+setup_config() {
+    echo -e "\n ✔ $GREEN Changing the Configuration .... $RESET \n"
+    eval rm ~/.bashrc
+    eval rm ~/.i3/config
+    eval ln -s .bashrc  ~/.bashrc
+    eval ln -s .i3/config ~/.i3/config
+    # vim
+    eval rm ~/.vimrc
+    eval ln -s .vimrc ~/.vimrc
+    # alacritty
+    eval mkdir -p ~/.config/alacritty
+    eval ln -s .alacritty.yml ~/.config/alacritty/alacritty.yml
+    # rofi
+    eval mkdir -p ~/.config/rofi/themes
+    eval ln -s center.rasi ~/.config/rofi/themes/center.rasi
+}
+
+
+# art
+asciiart=$(base64 -d <<< "ICAgICAgICAgXC4gICBcLiAgICAgIF9fLC0iLS5fXyAgICAgIC4vICAgLi8KICAgICAgIFwuICAgXGAuICBcYC4tJyIiIF8sPSI9Ll8gIiJgLS4nLyAgLicvICAgLi8KICAgICAgICBcYC4gIFxfYC0nJyAgICAgIF8sPSI9Ll8gICAgICBgYC0nXy8gIC4nLwogICAgICAgICBcIGAtJywtLl8gICBfLiAgXyw9Ij0uXyAgLF8gICBfLi0sYC0nIC8KICAgICAgXC4gL2AsLScsLS5fIiIiICBcIF8sPSI9Ll8gLyAgIiIiXy4tLGAtLCdcIC4vCiAgICAgICBcYC0nICAvICAgIGAtLl8gICIgICAgICAgIiAgXy4tJyAgICBcICBgLScvCiAgICAgICAvKSAgICggICAgICAgICBcICAgICwtLiAgICAvICAgICAgICAgKSAgIChcCiAgICAsLSciICAgICBgLS4gICAgICAgXCAgLyAgIFwgIC8gICAgICAgLi0nICAgICAiYC0sCiAgLCdfLl8gICAgICAgICBgLS5fX19fLyAvICBfICBcIFxfX19fLi0nICAgICAgICAgXy5fYCwKIC8sJyAgIGAuICAgICAgICAgICAgICAgIFxfLyBcXy8gICAgICAgICAgICAgICAgLicgICBgLFwKLycgICAgICAgKSAgICAgICAgICAgICAgICAgIF8gICAgICAgICBkZXYtZnJvZyAoICAgICAgIGBcCiAgICAgICAgLyAgIF8sLSciYC0uICAsKyt8VHx8fFR8KysuICAuLSciYC0sXyAgIFwKICAgICAgIC8gLC0nICAgICAgICBcL3xgfGB8YHwnfCd8J3xcLyAgICAgICAgYC0sIFwKICAgICAgLywnICAgICAgICAgICAgIHwgfCB8IHwgfCB8IHwgICAgICAgICAgICAgYCxcCiAgICAgLycgICAgICAgICAgICAgICBgIHwgfCB8IHwgfCAnICAgICAgICAgICAgICAgYFwKICAgICAgICAgICAgICAgICAgICAgICAgYCB8IHwgfCAnCiAgICAgICAgICAgICAgICAgICAgICAgICAgYCB8ICc=")
+
+banner() {
+    echo -e "$MAGENTA $asciiart $RESET"
+    echo -e "\n$BLUE Author: dev-frog   email: froghunter.cft@gmail.com"
+}
+
+install() {
+    update
+    install_tools
+    setup_config
+}
+
+banner
+check_distro
+check_root
+mirror_set
+install
