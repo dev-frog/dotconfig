@@ -82,7 +82,6 @@ banner() {
 install() {
     update
     install_tools
-    setup_config
 }
 
 banner

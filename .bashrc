@@ -87,7 +87,7 @@ if ${use_color} ; then
 	if [[ ${EUID} == 0 ]] ; then
 		PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
 	else
-		PS1='\[\033[01;32m\]\[\033[01;37m\]\W\[\033[01;32m\] \[\033[00m\]➤ '
+		PS1='\[\033[01;32m\]\[\033[01;37m\]\W\[\033[01;32m\] λ \[\033[00m\]'
 	fi
 
 	alias ls='ls --color=auto'
@@ -123,8 +123,8 @@ alias loip="/sbin/ifconfig enp2s0 | awk '/inet / {print $2}' | sed -e s/addr://"
 alias open="xdg-open"
 alias youtube_mp3="youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0"
 
-
-
+# vscode extension
+alias codeext="code --install-extension"
 
 alias sysinfo="inxi --admin --verbosity=7 --filter --no-host --width"
 #alias ..='cd ..'
@@ -133,6 +133,7 @@ alias sysinfo="inxi --admin --verbosity=7 --filter --no-host --width"
 #alias .4='cd ../../../..'
 #alias .5='cd ../../../../..'
 
+alias dc="cd"
 alias cd..="cd .."
 alias ..="cd .."
 alias ...="cd ../.."
@@ -194,6 +195,21 @@ alias gad="git add ."
 alias push="git push"
 alias pull="git pull"
 
+#python
+
+alias venv="python -m venv venv"
+
+# NextJS 
+alias nextjs="yarn create next-app"
+alias ydev="yarn dev"
+alias ybuild="yarn build"
+alias ystart="yarn build"
+
+## Note
+
+alias _nfastapi="vim __Note/fastapiNote.md"
+
+
 #get error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
 
@@ -207,6 +223,9 @@ alias em="/usr/bin/emacs -nw"
 # Develpment
 alias pas='php artisan serve'
 
+# git .gitconfig
+
+alias gitpass="git config user.auth | xclip -selection c"
 
 
 # Nodejs and npm
@@ -224,7 +243,7 @@ alias ns="npm start"
 # alias dstop="sudo docker stop -f $(sudo docker ps -a -q)"
 
 
-
+alias CS='ncdu -x /'
 
 xhost +local:root > /dev/null 2>&1
 
@@ -289,7 +308,6 @@ imgur() {
 }
 
 
-
 # Programming function
 
 cbt(){
@@ -308,7 +326,9 @@ pwnt(){
 	curl -L "https://raw.githubusercontent.com/dev-frog/templates/main/exploit.py" -o exploit_$1.py
 }
 
-
+io(){
+  curl -F 'f:1=<-' ix.io
+}
 
 
 export PATH=$PATH:~/go/bin
