@@ -1,0 +1,97 @@
+background_opacity: 0.9
+colors:
+  bright:
+    black: '0x5b6268'
+    blue: '0x3071db'
+    cyan: '0x46d9ff'
+    green: '0x4db5bd'
+    magenta: '0xa9a1e1'
+    red: '0xda8548'
+    white: '0xdfdfdf'
+    yellow: '0xecbe7b'
+  normal:
+    black: '0x1c1f24'
+    blue: '0x51afef'
+    cyan: '0x5699af'
+    green: '0x98be65'
+    magenta: '0xc678dd'
+    red: '0xff6c6b'
+    white: '0x202328'
+    yellow: '0xda8548'
+  primary:
+    background: '0x282c34'
+    foreground: '0xbbc2cf'
+  selection:
+    text: '0xbbc2cf'
+draw_bold_text_with_bright_colors: true
+env:
+  TERM: xterm-256color
+font:
+  offset:
+    x: 0
+    y: 1
+  size: 11.0
+key_bindings:
+- action: Paste
+  key: V
+  mods: Control|Shift
+- action: Copy
+  key: C
+  mods: Control|Shift
+- action: PasteSelection
+  key: Insert
+  mods: Shift
+- action: ResetFontSize
+  key: Key0
+  mods: Control
+- action: IncreaseFontSize
+  key: Equals
+  mods: Control
+- action: IncreaseFontSize
+  key: Plus
+  mods: Control
+- action: DecreaseFontSize
+  key: Minus
+  mods: Control
+- action: ToggleFullscreen
+  key: F11
+  mods: None
+- action: Paste
+  key: Paste
+  mods: None
+- action: Copy
+  key: Copy
+  mods: None
+- action: ClearLogNotice
+  key: L
+  mods: Control
+- chars: "\f"
+  key: L
+  mods: Control
+- action: ScrollPageUp
+  key: PageUp
+  mode: ~Alt
+  mods: None
+- action: ScrollPageDown
+  key: PageDown
+  mode: ~Alt
+  mods: None
+- action: ScrollToTop
+  key: Home
+  mode: ~Alt
+  mods: Shift
+- action: ScrollToBottom
+  key: End
+  mode: ~Alt
+  mods: Shift
+scrolling:
+  history: 5000
+window:
+  class:
+    general: Alacritty
+    instance: Alacritty
+  dynamic_padding: false
+  padding:
+    x: 6
+    y: 6
+  title: Alacritty
