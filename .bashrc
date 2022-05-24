@@ -210,8 +210,6 @@ alias ystart="yarn build"
 alias _nfastapi="vim __Note/fastapiNote.md"
 
 
-#get error messages from journalctl
-alias jctl="journalctl -p 3 -xb"
 
 # switch between  shells
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
