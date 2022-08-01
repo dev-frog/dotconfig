@@ -116,22 +116,33 @@ alias la='lsd -a'
 alias ll='ls -lah'
 alias disk='df -h'
 alias trash='trash-list'
+alias sysinfo="inxi --admin --verbosity=7 --filter --no-host --width"
+
+alias fm6000='fm6000 -n -c magenta -r'
+fm6000
+
+
+# Process 
 alias pss='ps -eaf --forest'
 alias pst='ps -ejH'
+alias ports="netstat -tulanp"
+alias psmem="ps auxf | sort -nr -k 4"
+alias pscpu="ps auxf | sort -nr -k 3"
+
+
 alias myip="curl https://ipinfo.io; echo"
 alias loip="/sbin/ifconfig enp2s0 | awk '/inet / {print $2}' | sed -e s/addr://"
 alias open="xdg-open"
-alias youtube_mp3="youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0"
+alias song="mocp"
+
+alias gpu="sudo radeon-profile"
+
+# Social site
+alias ymp3="youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0"
 
 # vscode extension
 alias codeext="code --install-extension"
 
-alias sysinfo="inxi --admin --verbosity=7 --filter --no-host --width"
-#alias ..='cd ..'
-#alias ...='cd ../..'
-#alias .3='cd ../../..'
-#alias .4='cd ../../../..'
-#alias .5='cd ../../../../..'
 
 alias dc="cd"
 alias cd..="cd .."
@@ -154,9 +165,28 @@ up() {
     fi
 }
 
-
-
+alias code.="code ."
+alias code,="code ."
+alias t="tmux"
 # my custom alias
+
+wlan() {
+  nmcli connection modify "Wired connection 1"  ipv4.addresses 10.167.28.112/24 gw4 10.167.28.1
+  nmcli connection modify "Wired connection 1" ipv4.dns 123.200.0.254
+  nmcli connection modify "Wired connection 1" ipv4.method manual
+  nmcli connection down "Wired connection 1"; nmcli connection up "Wired connection 1";
+  nmcli connection
+}
+
+alias mining="sudo /home/frog/Duno_Coin/AVR_Miner.py"
+
+dhcp() {
+  nmcli connection modify "Wired connection 1" ipv4.addresses 192.168.1.50/24 gw4 192.168.1.1
+  nmcli connection modify "Wired connection 1" ipv4.dns 1.1.1.1
+  nmcli connection modify "Wired connection 1" ipv4.method auto
+  nmcli connection down "Wired connection 1"; nmcli connection up "Wired connection 1";
+  nmcli connection
+}
 
 mc(){
   mkdir -p $1 && cd $_
@@ -173,7 +203,7 @@ alc() {
 
 # system command
 alias install="sudo pacman -S"
-alias SS="sudo systemctl"
+alias __="sudo systemctl "
 alias jctl="journalctl -p 3 -xb"
 
 # Server
@@ -181,10 +211,7 @@ alias www="python -m http.server 8000"
 alias pwww="php -S 0.0.0.0:8001"
 
 
-# Process 
-alias ports="netstat -tulanp"
-alias psmem="ps auxf | sort -nr -k 4"
-alias pscpu="ps auxf | sort -nr -k 3"
+alias license="npx license"
 
 # git alias
 alias gst="git status"
@@ -192,40 +219,23 @@ alias glog="git log"
 alias commit="git commit -a"
 alias gaup="git add -U"
 alias gad="git add ."
-alias push="git push"
-alias pull="git pull"
-
-#python
-
-alias venv="python -m venv venv"
-
-# NextJS 
-alias nextjs="yarn create next-app"
-alias ydev="yarn dev"
-alias ybuild="yarn build"
-alias ystart="yarn build"
-
-## Note
-
-alias _nfastapi="vim __Note/fastapiNote.md"
-
-
-#get error messages from journalctl
-alias jctl="journalctl -p 3 -xb"
-
-# switch between  shells
-alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
-alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
-
-alias em="/usr/bin/emacs -nw"
-
-
-# Develpment
-alias pas='php artisan serve'
+alias push="git push origin"
+alias pull="git pull origin"
+alias gb="git branch"
+alias gc="git checkout"
+alias gcb="git checkout -b"
+alias glol="git log --oneline"
 
 # git .gitconfig
-
 alias gitpass="git config user.auth | xclip -selection c"
+
+gitignore () {
+  curl https://www.toptal.com/developers/gitignore/api/visualstudiocode,$1 > .gitignore 
+}
+
+
+#python
+alias venv="python -m venv venv"
 
 
 # Nodejs and npm
@@ -235,33 +245,48 @@ alias nid="npm i --save-dev"
 alias ng="sudo npm -g i"
 alias nd="npm run dev"
 alias ns="npm start"
+alias ni="npm i"
 
-# Docker
-# dkill() { 
-# 	sudo docker rm -f $(sudo docker ps -a -q):
-# }
-# alias dstop="sudo docker stop -f $(sudo docker ps -a -q)"
+# Yarn
+alias ydev="yarn dev"
+alias ybuild="yarn build"
+alias ystart="yarn build"
+
+# NextJS
+alias nextjs="npx create-next-app"
+alias react="npx create-react-app"
+
+## Note
+alias _nfastapi="vim __Note/fastapiNote.md"
+alias nf="neofetch"
 
 
+#get error messages from journalctl
+alias jctl="journalctl -p 3 -xb"
+
+# switch between  shells
+alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
+alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
+alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
+
+alias em="/usr/bin/emacs -nw"
+
+
+# Develpment
+alias pas='php artisan serve'
+
+
+
+# Clean all temp file
 alias CS='ncdu -x /'
 
 xhost +local:root > /dev/null 2>&1
-
 complete -cf sudo
-
-# Bash won't get SIGWINCH if another process is in the foreground.
-# Enable checkwinsize so that bash will check the terminal size when
-# it regains control.  #65623
-# http://cnswww.cns.cwru.edu/~chet/bash/FAQ (E11)
 shopt -s checkwinsize
-
 shopt -s expand_aliases
-
-# export QT_SELECT=4
-
-# Enable history appending instead of overwriting.  #139609
 shopt -s histappend
-
+# export BROWSER=chromium
+# export browser=chromium
 #
 # # ex - archive extractor
 # # usage: ex <file>
@@ -333,3 +358,10 @@ io(){
 
 export PATH=$PATH:~/go/bin
 
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+eval "$(starship init bash)"

@@ -43,12 +43,28 @@ mirror_set(){
 
 update() {
     echo -e "\n ✔ $GREEN Updating system using pacman  update command.... $RESET \n"
-    eval pacman -Syyu
+    #eval pacman -Syyu
 }
 
 install_tools() {
     echo -e "\n ✔ $GREEN Installing some tools .... $RESET \n"
-    eval pacman -S gcc code chromium rofi vifm lsd go nodejs npm alacritty gdb tmux
+    eval pacman -S gcc code chromium rofi vifm lsd go nodejs npm alacritty gdb tmux python-pip teams discord simplescreenrecorder
+}
+
+install_starship() {
+    echo -e "\n ✔ $GREEN Installing Starship.... $RESET \n"
+    curl -sS https://starship.rs/install.sh | sh
+}
+
+install_spacevim() {
+    echo -e "\n ✔ $GREEN Installing SpaceVim.... $RESET \n"
+    curl -sLf https://spacevim.org/install.sh | bash
+}
+
+# some Tools
+
+tools_(){
+    eval pacman -S lxappearance qt5ct 
 }
 
 
