@@ -433,7 +433,7 @@ alias pwww="php -S 0.0.0.0:8001"
 
 box() {
 curl -X POST https://content.dropboxapi.com/2/files/upload \
-    --header "Authorization: Bearer sl.BNGDtSW-RAyMNRHN9Zqaf1ildJ66gV-qLhQb3PdC4i1_i6AlB7UKFlPIxj-8T7TiByl43jikkWboeAzzu_ky1Z6UkAr3U6HuY0eW3Wfd1zloAHio0mLtR2n5pmYiEGRs1SlkeQvmzyRK" \
+    --header "Authorization: Bearer " \
     --header "Dropbox-API-Arg: {\"path\": \"/$2\"}" \
     --header "Content-Type: application/octet-stream" \
     --data-binary @$1
